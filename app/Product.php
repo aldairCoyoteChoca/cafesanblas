@@ -32,7 +32,7 @@ class Product extends Model
         if($file){
             $imageName = Str::random(20). '.jpg';
             $imagen = Image::make($file)->encode('jpg',75);
-            $imagen->resize(800, 800, function($constraint){
+            $imagen->resize(900, 500, function($constraint){
                 $constraint->upsize();
             });
             Storage::disk('public')->put("image/$imageName", $imagen->stream());

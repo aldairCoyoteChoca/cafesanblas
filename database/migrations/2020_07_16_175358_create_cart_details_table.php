@@ -14,24 +14,22 @@ class CreateCartDetailsTable extends Migration
     public function up()
     {
         Schema::create('cart_details', function (Blueprint $table) {
-            $table->bigIncrements('id');
-
-            $table->unsignedBigInteger('cart_id')->index();
-            $table->foreign('cart_id')->references('id')->on('carts')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
+            $table->increments('id');
+            $table->integer('cart_id')->unsigned()->index();
             $table->enum('status', [1, 2]);
-
-            $table->unsignedBigInteger('product_id')->index();
-            $table->foreign('product_id')->references('id')->on('products')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
-
-            $table->unsignedBigInteger('quantify')->index();
+            $table->integer('product_id')->unsigned()->index();
+            $table->float('quantify');
             $table->float('price');
             $table->float('subtotal');
             $table->integer('discount')->default(0);
 
+            $table->foreign('cart_id')->references('id')->on('carts')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+
+            $table->foreign('product_id')->references('id')->on('products')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
             $table->timestamps();
         });
     }
