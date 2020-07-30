@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Seeder;
 use Caffeinated\Shinobi\Models\Role;
+use App\User;
+use Illuminate\Support\Str;
+
+
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,7 +23,17 @@ class UsersTableSeeder extends Seeder
             'special'       => 'all-access'
         ]);
 
-        factory(App\User::class)->create()->each(function(App\User $user){
+        User::create([
+            'name' => 'Administrador',
+            'email' => 'administrador@admin.com',
+            'photo' => 'image/icons/default.jpg',
+            'phone'         => rand(5576324923, 5576324923),
+            'postal_code'   => rand(12345, 99999),
+            'pedidos'       => 'RECIBIR',
+            'email_verified_at' => now(),
+            'password' => bcrypt('12345678'), // password
+            'remember_token' => Str::random(10),
+        ])->each(function(App\User $user){
             $user->role()->attach([
                 1
             ]);
