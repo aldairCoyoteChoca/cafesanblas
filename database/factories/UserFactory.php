@@ -22,7 +22,6 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => 'administrador@admin.com',
         'photo' => 'image/icons/default.jpg',
         'phone'         => rand(5576324923, 5576324923),
-        'address'       => $faker->sentence,
         'postal_code'   => rand(12345, 99999),
         'pedidos'       => 'RECIBIR',
         'email_verified_at' => now(),
